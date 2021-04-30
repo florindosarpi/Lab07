@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import it.polito.tdp.poweroutages.model.Model;
 import it.polito.tdp.poweroutages.model.Nerc;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -24,6 +26,7 @@ public class FXMLController {
 
     @FXML // fx:id="cmbNerc"
     private ComboBox<Nerc> cmbNerc; // Value injected by FXMLLoader
+    private ObservableList<Nerc> nercValues;
 
     @FXML // fx:id="txtYears"
     private TextField txtYears; // Value injected by FXMLLoader
@@ -39,6 +42,9 @@ public class FXMLController {
     @FXML
     void doRun(ActionEvent event) {
     	txtResult.clear();
+    	
+    	
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -47,6 +53,9 @@ public class FXMLController {
         assert txtYears != null : "fx:id=\"txtYears\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtHours != null : "fx:id=\"txtHours\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
+        this.model=new Model();
+        nercValues = FXCollections.observableList(this.model.getNercList());
+        cmbNerc.setItems(nercValues);
         
         // Utilizzare questo font per incolonnare correttamente i dati;
         txtResult.setStyle("-fx-font-family: monospace");
